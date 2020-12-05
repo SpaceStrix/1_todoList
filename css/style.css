@@ -1,0 +1,99 @@
+/* variables */
+:root {
+    --bg-color: #263eac;
+    --border-radius: 20px;
+    --main-container-bg: #f4f8f9;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--main-container-bg);
+    font-size: 14px;
+
+}
+
+.bg-contfluid {
+    position: relative;
+
+    background-color: var(--bg-color);
+    height: 250px;
+    
+    /* border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius) */
+}
+
+.main-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 150px;
+
+    border-radius: var(--border-radius);
+    background-color: #fff;
+}
+.main-panel {
+    padding: 10px 0;
+}
+
+.add-task-btn {
+    background-color: var(--bg-color);
+    color: #ffffff;
+}
+.btn-task-group {
+    margin: 0 5px;
+}
+.btn-task-group:hover {
+    color: var(--bg-color);
+}
+
+.btn {
+    border-radius: var((--border-radius)-5px);
+    padding: 2px 15px;
+    font-size: 12px;
+}
+
+.task-container-panel {
+    padding: 10px 0;
+    background-color: #eef4f4;
+}
+
+h6{
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    /* text-align: center; */
+}
+
+/*  */
+
+.one-task {
+    padding: 15px 0;
+}
+
+.priority{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    
+}
+
+.status {
+    margin: 0 4px 0 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgb(241, 151, 17);
+}
+
+
+/* FORM */
+.form-group {
+    background-color: var(--main-container-bg);
+    padding: 10px;
+    border-radius: var((--border-radius)-5px);
+
+}
+
+.visibility-form{
+    display: none;
+}
