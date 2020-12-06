@@ -39,13 +39,41 @@ const task = [
 
 	// FORM
 	const addTaskForm = document.querySelector('.add-task-btn');
+	const form = document.forms['setTask'];
+	const submitFormButton = document.querySelector('.submitFormButton');
+	// console.log(submitFormButton);
+	// FORM elements
+	const inputText = form.elements['input-text'];
+	const selectPriority = form.elements['select-priority'];
 
+	// EVENTS
 	addTaskForm.addEventListener('click', addTaskFormHandler);
-
 	function addTaskFormHandler(e) {
-		const visibilityForm = document.querySelector('.form-group');
+		const visibilityForm = document.querySelector('.form-block');
 		visibilityForm.classList.toggle('visibility-form');
 	}
+
+	form.addEventListener('submit', submitFormButtonHandler);
+	function submitFormButtonHandler(e) {
+		e.preventDefault();
+
+		const inputValue = inputText.value;
+		const selectValue = selectPriority.value;
+		// const status = document.querySelector('.status');
+
+		if (!inputValue.length || !selectValue.length) {
+			return alert('Поля пустые');
+		}
+
+		const task = createNewTask(inputValue, selectValue);
+
+		const newTaskList = taskTemplate(task);
+		taskListContainer.insertAdjacentElement('afterbegin', newTaskList);
+
+		form.reset();
+	}
+
+	//
 
 	//Превратили массив в объект
 	const newObj = taskList.reduce((acc, task) => {
@@ -94,9 +122,20 @@ const task = [
 		return oneTask;
 	}
 
+	// создание новой задачи
+	function createNewTask(taskTitle, taskPriority) {
+		const dateCreateTask = new Date();
+		const newTask = {
+			_id: 1,
+			title: `${taskTitle}`,
+			priority: `${taskPriority}`,
+			comments: `${Math.floor(Math.random() * 10)} comments`,
+			time: `${dateCreateTask.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`,
+			comleted: false
+		};
+		newObj[newTask._id] = newTask;
+		return { ...newTask };
+	}
+
 	//
 })(task);
-
-const date = new Date();
-
-const time = `${date.getHours()}:${date.getMinutes()}`;

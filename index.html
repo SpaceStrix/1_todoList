@@ -41,23 +41,24 @@
         </div>
         <!-- /.b -->
 
-        <div class="container form-block">
-            <form>
-                <div class="form-group visibility-form">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput"
+        <div class="container form-block visibility-form">
+            <form name="setTask">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Task body</label>
+                    <input type="text" class="form-control" name="input-text" id="formGroupExampleInput"
                         placeholder="Example input placeholder">
-
                     <div class="form-row align-items-center">
                         <div class="col-auto my-1">
                             <label class="mr-sm-2" for="inlineFormCustomSelect">Priority</label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="select-priority">
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
                             </select>
                         </div>
                     </div>
+                </div>
+                <button type="submit" class="btn btn-primary submitFormButton">Submit</button>
             </form>
         </div>
         <!-- /.container -->

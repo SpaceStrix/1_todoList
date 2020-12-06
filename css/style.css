@@ -87,13 +87,26 @@ h6{
 
 
 /* FORM */
-.form-group {
-    background-color: var(--main-container-bg);
+.form-block {
+    background-color: #eef4f4;
     padding: 10px;
-    border-radius: var((--border-radius)-5px);
+    border-radius: 10px;
+    margin-bottom: 10px;
 
 }
 
 .visibility-form{
     display: none;
+    transition: all 1s;
+}
+
+
+.low{
+    background-color: red
+}
+.medium{
+    background-color: orange
+}
+.high{
+    background-color: green
 }
