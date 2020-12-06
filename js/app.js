@@ -36,6 +36,7 @@ const task = [
 (function(taskList) {
 	// Контейнер со всеми тасками
 	const taskListContainer = document.querySelector('.task-list');
+	const emptylist = document.querySelector('.emptylisttask');
 
 	// FORM
 	const addTaskForm = document.querySelector('.add-task-btn');
@@ -70,10 +71,53 @@ const task = [
 		const newTaskList = taskTemplate(task);
 		taskListContainer.insertAdjacentElement('afterbegin', newTaskList);
 
+		if (taskListContainer.children.length !== 0) {
+			emptylist.classList.add('hidden');
+		}
+
 		form.reset();
 	}
 
-	//
+	taskListContainer.addEventListener('click', deleteTaskHandler);
+	function deleteTaskHandler({ target }) {
+		if (target.classList.contains('delete-btn')) {
+			const parent = target.closest('[data-id]');
+			const id = parent.dataset.id;
+
+			const confirmed = deleteTask(id);
+			deleteTaksFromContainer(confirmed, parent);
+		}
+	}
+	function deleteTask(id) {
+		const isConfirm = confirm('Удалить данную задачу?');
+		if (!isConfirm) return isConfirm;
+		delete newObj[id];
+		return isConfirm;
+	}
+	function deleteTaksFromContainer(confirmed, el) {
+		if (!confirmed) return;
+		el.remove();
+		//
+		if (taskListContainer.children.length === 0) {
+			emptylist.classList.remove('hidden');
+		}
+	}
+	taskListContainer.addEventListener('click', completeTaskHandler);
+
+	function completeTaskHandler({ target }) {
+		if (target.classList.contains('complete-btn')) {
+			const parent = target.closest('[data-comleted]');
+			parent.classList.add('complete');
+			const status = parent.dataset.comleted;
+			completeTaksFromContainer(status, parent);
+		}
+	}
+
+	function completeTaksFromContainer(comleted, parent) {
+		if (comleted) {
+			parent.classList.add('complete');
+		}
+	}
 
 	//Превратили массив в объект
 	const newObj = taskList.reduce((acc, task) => {
@@ -90,16 +134,22 @@ const task = [
 		taskListContainer.append(fragment);
 	});
 
-	function taskTemplate({ title, priority, comments, time, comleted } = {}) {
+	function taskTemplate({ _id, title, priority, comments, time, comleted } = {}) {
 		const oneTask = document.createElement('div');
 		oneTask.classList.add('one-task');
+
+		if (comleted) {
+			oneTask.classList.add('complete');
+		}
+
 		oneTask.setAttribute('data-comleted', `${comleted}`);
+		oneTask.setAttribute('data-id', `${_id}`);
 		oneTask.innerHTML = `
 		<div class="row">
-		<div class="col-sm-6">
-			<span>${title}</span>
+		<div class="col-sm-4">
+			<span class="task-title">${title}</span>
 		</div>
-		<!-- /.col-sm-6 -->
+		<!-- /.col-sm-4 -->
 		<div class="col-sm-2">
 			<div class="priority">
 				<div class="status"></div>
@@ -113,20 +163,23 @@ const task = [
 			<span>${comments}</span>
 		</div>
 		<!-- /.col-sm-2 -->
-		<div class="col-sm-2">
+		<div class="col-sm-1">
 			<span>${time}</span>
+		</div>
+		<div class="col-sm-3">
+		<button type="button" class="btn btn-light delete-btn">Удалить</button>
+		<button type="button" class="btn btn-light complete-btn">Завершить</button>
 		</div>
 		<!-- /.col-sm-2-->
 	</div>
 	`;
 		return oneTask;
 	}
-
 	// создание новой задачи
 	function createNewTask(taskTitle, taskPriority) {
 		const dateCreateTask = new Date();
 		const newTask = {
-			_id: 1,
+			_id: `${[ ...taskListContainer.children ].length + 1}`,
 			title: `${taskTitle}`,
 			priority: `${taskPriority}`,
 			comments: `${Math.floor(Math.random() * 10)} comments`,
@@ -137,5 +190,6 @@ const task = [
 		return { ...newTask };
 	}
 
+	// console.log(document.querySelector('.complete-btn'));
 	//
 })(task);

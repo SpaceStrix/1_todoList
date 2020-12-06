@@ -68,6 +68,7 @@ h6{
 
 .one-task {
     padding: 15px 0;
+    margin: 3px 0;
 }
 
 .priority{
@@ -101,12 +102,28 @@ h6{
 }
 
 
-.low{
-    background-color: red
+.hidden {
+    display: none;
 }
-.medium{
-    background-color: orange
+
+.complete {
+    background-color: rgba(34, 187, 128, 0.568);
+    border-radius: 2px;
 }
-.high{
-    background-color: green
+
+.task-title {
+    padding-left: 5px;
+}
+
+.emptylisttask {
+    margin: 15px 0;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+.complete-btn:hover {
+    background-color: #28a745;
+    color: #ffffff;
 }
