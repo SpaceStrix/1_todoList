@@ -37,11 +37,13 @@ const task = [
 	// Контейнер со всеми тасками
 	const taskListContainer = document.querySelector('.task-list');
 	const emptylist = document.querySelector('.emptylisttask');
+	const completeTaskBtn = document.querySelector('.complete-task-btn');
+	const allTask = document.querySelector('.all-task-btn');
 
 	// FORM
 	const addTaskForm = document.querySelector('.add-task-btn');
 	const form = document.forms['setTask'];
-	const submitFormButton = document.querySelector('.submitFormButton');
+	// const submitFormButton = document.querySelector('.submitFormButton');
 	// console.log(submitFormButton);
 	// FORM elements
 	const inputText = form.elements['input-text'];
@@ -77,7 +79,6 @@ const task = [
 
 		form.reset();
 	}
-
 	taskListContainer.addEventListener('click', deleteTaskHandler);
 	function deleteTaskHandler({ target }) {
 		if (target.classList.contains('delete-btn')) {
@@ -112,11 +113,27 @@ const task = [
 			completeTaksFromContainer(status, parent);
 		}
 	}
-
 	function completeTaksFromContainer(comleted, parent) {
 		if (comleted) {
 			parent.classList.add('complete');
 		}
+	}
+	completeTaskBtn.addEventListener('click', completeListTaskHandler);
+	function completeListTaskHandler() {
+		[ ...taskListContainer.children ].forEach((task) => {
+			if (!task.classList.contains('complete')) {
+				task.classList.add('hidden');
+			}
+		});
+	}
+	allTask.addEventListener('click', allTaskHandler);
+	function allTaskHandler() {
+		[ ...taskListContainer.children ].forEach((task) => {
+			if (!task.classList.contains('complete')) {
+				task.classList.remove('hidden');
+			}
+			// console.log(task.classList.contains('complete'));
+		});
 	}
 
 	//Превратили массив в объект
